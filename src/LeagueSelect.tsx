@@ -27,7 +27,7 @@ const Leagues: Array<League> = [
   ),
   makeLeagueFromPlayerList(
     'Guacamole bay',
-    ['Sina', 'Zihao'],
+    ['Elliott', 'Geoffrey', 'Jeffrey', 'Jin', 'Piranavan', 'Sina', 'Zihao'],
   ),
 ]
 
