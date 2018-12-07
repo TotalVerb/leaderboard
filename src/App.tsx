@@ -1,8 +1,8 @@
 import * as React from 'react'
 import './App.css'
 
-import logo from './logo.svg'
 import { HTMLTable } from "@blueprintjs/core"
+import { GlobalLeague, League, LeagueSelect } from "./LeagueSelect"
 import { playerNumbers } from "./theScoreNumber"
 
 interface Athlete {
@@ -134,13 +134,15 @@ class Scoreboard extends React.Component<ScoreboardProps, {}> {
 
 interface AppState {
   data: LineupMap
+  league: League
 }
 
 class App extends React.Component<{}, AppState> {
   public constructor(props: {}) {
     super(props)
     this.state = {
-      data: {}
+      data: {},
+      league: GlobalLeague,
     }
   }
 
@@ -154,17 +156,25 @@ class App extends React.Component<{}, AppState> {
 
   public componentDidMount() {
     this.refreshScoreboard()
-    setInterval(this.refreshScoreboard, 30000)
+    setInterval(this.refreshScoreboard, 60000)
+  }
+
+  public changeLeague = (league: League) => {
+    this.setState({ league })
   }
 
   public render() {
+    let filteredData = {}
+    Object.keys(this.state.data).filter(this.state.league.filter).forEach(k => {
+      filteredData[k] = this.state.data[k]
+    })
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Fantasy NBA Live Scoreboard</h1>
+          <LeagueSelect onSelect={this.changeLeague} />
         </header>
-        <Scoreboard lineups={this.state.data} />
+        <Scoreboard lineups={filteredData} />
       </div>
     )
   }
