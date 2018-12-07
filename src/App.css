@@ -26,3 +26,20 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+img.headshot {
+  float: right;
+  margin: 0;
+  width: 3em;
+  height: 3em;
+  margin: -11px;
+}
+
+table.bp3-html-table td.athlete-name b {
+  font-weight: normal;
+}
+
+table.bp3-html-table td.score {
+  text-align: right;
+  font-family: monospace;
+}
