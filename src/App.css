@@ -27,19 +27,57 @@
   to { transform: rotate(360deg); }
 }
 
-img.headshot {
-  float: right;
-  margin: 0;
-  width: 3em;
-  height: 3em;
-  margin: -11px;
+table.bp3-html-table td.athlete-name {
+  position: relative;
 }
 
-table.bp3-html-table td.athlete-name b {
-  font-weight: normal;
+img.headshot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+  width: 52px;
+  height: 52px;
+  z-index: 0;
+}
+
+table.bp3-html-table td.athlete-name {
+  padding-left: 55px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-right: 5px;
+}
+
+table.bp3-html-table td.athlete-name span {
+  font-size: 0.8em;
+}
+
+table.bp3-html-table td.athlete-name mark {
+  font-weight: bold;
+  background: none;
+  font-size: 1.4em;
+}
+
+table.bp3-html-table tr {
+  border-top: 3px white solid;
+  border-bottom: 3px white solid;
+  margin-top: 3px;
+  margin-bottom: 3px;
 }
 
 table.bp3-html-table td.score {
   text-align: right;
   font-family: monospace;
+  padding: 7px;
+}
+
+span.actual {
+  font-size: 1.3em;
+  line-height: 1.0em;
+}
+
+span.projection {
+  font-size: 1em;
+  line-height: 1.0em;
+  color: green;
 }
