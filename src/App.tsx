@@ -5,6 +5,14 @@ import { HTMLTable } from "@blueprintjs/core"
 import { GlobalLeague, League, LeagueSelect } from "./LeagueSelect"
 import { Athlete, getHeadshot, project } from './athlete'
 import { ScoreAndProjection } from './ScoreAndProjection'
+import { DateInput, IDateFormatProps } from "@blueprintjs/datetime"
+
+const jsDateFormatter: IDateFormatProps = {
+    // note that the native implementation of Date functions differs between browsers
+    formatDate: date => date.toISOString().slice(0, 10),
+    parseDate: str => new Date(str),
+    placeholder: "YYYY-MM-DD",
+}
 
 interface LineupMap {
   [name: string]: Array<Athlete>
@@ -34,14 +42,20 @@ interface AthleteNameProps {
 
 function AthleteName({name}: AthleteNameProps) {
   let parts = name.split(' ')
-  let firstName = parts.slice(0, parts.length - 1).join(' ')
+  let firstNameCutoff = parts.length - 1
   let lastName = parts[parts.length - 1]
+  if (lastName === 'Jr.') {
+    lastName = [parts[parts.length - 2], lastName].join(' ')
+    firstNameCutoff -= 1
+  }
+  let firstName = parts.slice(0, firstNameCutoff).join(' ')
   return (
-    <span>
-      {firstName}
-      <br />
+    <>
+      <span className="first-name">
+        {firstName}
+      </span>
       <mark>{lastName}</mark>
-    </span>
+    </>
   )
 }
 
@@ -57,13 +71,11 @@ function AthleteCell({athlete}: AthleteProps) {
   }
   return (
     <>
-      <td className="athlete-name" style={style}>
+      <td className="name athlete-name" style={style}>
         {headshot !== null ?
           (<img src={headshot} className="headshot" />) :
           null}
         <AthleteName name={athlete.name} />
-      </td>
-      <td className="score" style={style}>
         <ScoreAndProjection
           score={athlete.fpts}
           projection={project(athlete)}
@@ -80,14 +92,14 @@ interface ScoreboardRowProps {
 function ScoreboardRow({contestant}: ScoreboardRowProps) {
   return (
     <tr>
-      <td>{contestant.name}</td>
-      <td className="score">
+      <td className="name contestant-name">
+        <span className="contestant">{contestant.name}</span>
         <ScoreAndProjection
           score={contestant.total}
           projection={contestant.lineup.map(project).reduce((f, g) => f + g, 0.0)}
         />
       </td>
-      { contestant.lineup.map(athlete => (<AthleteCell athlete={athlete} />)) }
+      { contestant.lineup.map(athlete => (<AthleteCell key={athlete.name} athlete={athlete} />)) }
     </tr>
   )
 }
@@ -96,13 +108,14 @@ class ScoreboardHeader extends React.Component {
   public render() {
     return (
       <thead>
-        <th>Name</th>
-        <th>Score</th>
-        <th colSpan={2}>PG</th>
-        <th colSpan={2}>SG</th>
-        <th colSpan={2}>SF</th>
-        <th colSpan={2}>PF</th>
-        <th colSpan={2}>C</th>
+        <tr className="hide-when-small">
+          <th>Contestant</th>
+          <th>PG</th>
+          <th>SG</th>
+          <th>SF</th>
+          <th>PF</th>
+          <th>C</th>
+        </tr>
       </thead>
     )
   }
@@ -147,6 +160,7 @@ class Scoreboard extends React.Component<ScoreboardProps, {}> {
 interface AppState {
   data: LineupMap
   league: League
+  date: Date | null
 }
 
 class App extends React.Component<{}, AppState> {
@@ -155,11 +169,16 @@ class App extends React.Component<{}, AppState> {
     this.state = {
       data: {},
       league: GlobalLeague,
+      date: null,
     }
   }
 
   public refreshScoreboard = () => {
-    fetch('https://nba.uwseminars.com/api')
+    let url = 'https://nba.uwseminars.com/api'
+    if (this.state.date !== null) {
+      url = url + `?date=${jsDateFormatter.formatDate(this.state.date)}`
+    }
+    fetch(url)
       .then(response => response.json())
       .then(response => {
         this.setState({ data: response })
@@ -175,6 +194,10 @@ class App extends React.Component<{}, AppState> {
     this.setState({ league })
   }
 
+  public changeDate = (date: Date) => {
+    this.setState({ date }, this.refreshScoreboard)
+  }
+
   public render() {
     let filteredData = {}
     Object.keys(this.state.data).filter(this.state.league.filter).forEach(k => {
@@ -183,8 +206,13 @@ class App extends React.Component<{}, AppState> {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">Fantasy NBA Live Scoreboard</h1>
+          <h1 className="App-title">Live Scoreboard</h1>
           <LeagueSelect onSelect={this.changeLeague} />
+          <DateInput
+            {...jsDateFormatter}
+            onChange={this.changeDate}
+            value={this.state.date || new Date()}
+          />
         </header>
         <Scoreboard lineups={filteredData} />
       </div>

@@ -27,7 +27,7 @@
   to { transform: rotate(360deg); }
 }
 
-table.bp3-html-table td.athlete-name {
+table.bp3-html-table td.name {
   position: relative;
 }
 
@@ -41,21 +41,41 @@ img.headshot {
   z-index: 0;
 }
 
+table.bp3-html-table td.contestant-name {
+  padding-left: 7px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-right: 65px;
+}
+
+table.bp3-html-table td.contestant-name span.contestant {
+  line-height: 38px;
+}
+
 table.bp3-html-table td.athlete-name {
   padding-left: 55px;
   padding-top: 7px;
   padding-bottom: 7px;
-  padding-right: 5px;
+  padding-right: 55px;
 }
 
-table.bp3-html-table td.athlete-name span {
-  font-size: 0.8em;
+table.bp3-html-table td.name {
+  height: 52px;
 }
 
-table.bp3-html-table td.athlete-name mark {
+table.bp3-html-table td.name span.first-name {
+  display: block;
+  margin: 0;
+  font-size: 12px;
+}
+
+table.bp3-html-table td.name mark {
+  display: block;
+  margin: 0;
   font-weight: bold;
   background: none;
-  font-size: 1.4em;
+  font-size: 20px;
+  line-height: 20px;
 }
 
 table.bp3-html-table tr {
@@ -65,19 +85,68 @@ table.bp3-html-table tr {
   margin-bottom: 3px;
 }
 
-table.bp3-html-table td.score {
+span.actual {
   text-align: right;
+  display: inline-block;
+  position: absolute;
+  top: 5px;
+  right: 5px;
   font-family: monospace;
-  padding: 7px;
+  font-size: 18px;
 }
 
-span.actual {
-  font-size: 1.3em;
-  line-height: 1.0em;
+span.actual.done {
+  top: 16px;
+  color: rgba(75, 75, 75, 1);
 }
 
 span.projection {
-  font-size: 1em;
-  line-height: 1.0em;
+  text-align: right;
+  position: absolute;
+  top: 30px;
+  right: 5px;
+  display: inline-block;
+  font-size: 14px;
   color: green;
+}
+
+@media only screen and (max-width: 600px) {
+  table.bp3-html-table td.name {
+    padding: 0;
+    background: none !important;
+    text-align: center;
+    max-width: 55px;
+    overflow: hidden;
+  }
+  table.bp3-html-table td.contestant-name span.contestant {
+    font-size: 10px;
+  }
+  table.bp3-html-table td.name img.headshot {
+    position: static;
+    width: 50px;
+    height: 50px;
+  }
+  table.bp3-html-table td.name span.first-name {
+    display: none;
+  }
+  table.bp3-html-table td.name mark {
+    font-size: 10px;
+  }
+  table.bp3-html-table td.name span.actual {
+    font-family: inherit;
+    font-size: 12px;
+    display: block;
+    position: static;
+    text-align: center;
+  }
+  table.bp3-html-table td.name span.projection {
+    font-family: inherit;
+    font-size: 12px;
+    display: block;
+    position: static;
+    text-align: center;
+  }
+  .hide-when-small {
+    display: none;
+  }
 }

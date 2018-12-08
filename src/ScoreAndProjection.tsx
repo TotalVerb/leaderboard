@@ -6,7 +6,7 @@ interface ScoreAndProjectionProps {
 }
 
 export function ScoreAndProjection({score, projection}: ScoreAndProjectionProps) {
-  if (projection !== undefined) {
+  if (projection !== undefined && score.toFixed(1) !== projection.toFixed(1)) {
     return (
       <>
         <span className="actual">{score.toFixed(1)}</span>
@@ -16,7 +16,7 @@ export function ScoreAndProjection({score, projection}: ScoreAndProjectionProps)
     )
   } else {
     return (
-      <span className="actual">{score.toFixed(1)}</span>
+      <span className="actual done">{score.toFixed(1)}</span>
     )
   }
 }
