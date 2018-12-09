@@ -211,7 +211,8 @@ class App extends React.Component<{}, AppState> {
           <DateInput
             {...jsDateFormatter}
             onChange={this.changeDate}
-            value={this.state.date || new Date()}
+            value={this.state.date}
+            showActionsBar={true}
           />
         </header>
         <Scoreboard lineups={filteredData} />
