@@ -36,6 +36,6 @@ export function project(athlete: Athlete): number {
     - 3 * (doubles >= 3 ? 1 : 0)
     - athlete.turnovers * 0.5
   )
-  let adjustedProjection = athlete.fpts + (rawProjection - athlete.fpts) * 0.85
+  let adjustedProjection = athlete.fpts + (rawProjection - athlete.fpts) * 0.9
   return adjustedProjection
 }
