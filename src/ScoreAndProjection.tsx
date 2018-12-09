@@ -10,7 +10,6 @@ export function ScoreAndProjection({score, projection}: ScoreAndProjectionProps)
     return (
       <>
         <span className="actual">{score.toFixed(1)}</span>
-        <br />
         <span className="projection">{projection.toFixed(1)}</span>
       </>
     )

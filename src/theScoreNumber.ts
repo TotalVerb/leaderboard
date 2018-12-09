@@ -448,7 +448,7 @@ export const playerNumbers = {
   "Gary Harris": 25548,
   "Malik Beasley": 44947,
   "Jamal Murray": 44995,
-  "Juancho Hernangómez": 52282,
+  "Juancho Hernangomez": 52282,  // corrected
   "Nikola Jokic": 37604,
   "Thomas Welsh": 37916,
   "Tyler Lydon": 45091,
