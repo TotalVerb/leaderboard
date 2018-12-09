@@ -78,13 +78,6 @@ table.bp3-html-table td.name mark {
   line-height: 20px;
 }
 
-table.bp3-html-table tr {
-  border-top: 3px white solid;
-  border-bottom: 3px white solid;
-  margin-top: 3px;
-  margin-bottom: 3px;
-}
-
 span.actual {
   text-align: right;
   display: inline-block;
@@ -110,24 +103,91 @@ span.projection {
   color: green;
 }
 
-@media only screen and (max-width: 600px) {
-  table.bp3-html-table td.name {
-    padding: 0;
-    background: none !important;
-    text-align: center;
-    max-width: 55px;
-    overflow: hidden;
+thead {
+  border-bottom: none;
+}
+
+@media only screen and (max-width: 1400px) {
+  table.bp3-html-table td.name mark {
+    font-size: 14px;
   }
+}
+
+@media only screen and (max-width: 1150px) {
+  table.bp3-html-table, table.bp3-html-table tbody, table.bp3-html-table tr {
+    display: block;
+    width: 100%;
+  }
+  table.bp3-html-table td.contestant-name span.contestant {
+    font-size: 12px;
+    display: block;
+  }
+  table.bp3-html-table td.name {
+    display: inline-block;
+    background: none !important;
+    padding: 0;
+    width: 16%;
+    height: 75px;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  table.bp3-html-table td.athlete-name {
+    padding-left: 55px;
+  }
+  table.bp3-html-table td.name span.first-name {
+    display: none;
+  }
+  table.bp3-html-table td.name mark {
+    font-size: 12px;
+  }
+  table.bp3-html-table td.name span.actual {
+    font-family: inherit;
+    font-size: 12px;
+    display: inline-block;
+    margin-right: 5px;
+    position: static;
+    text-align: center;
+  }
+  table.bp3-html-table td.name span.projection {
+    font-family: inherit;
+    font-size: 12px;
+    display: inline-block;
+    position: static;
+    text-align: center;
+  }
+  table.bp3-html-table td.name span.actual.done {
+    margin: 0;
+  }
+  .table.bp3-html-table, table.bp3-html-table tr.hide-when-small {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  table.bp3-html-table td.name {
+    text-align: center;
+    height: 95px;
+  }
+  table.bp3-html-table td.athlete-name {
+    padding-left: 0;
+  }
+  table.bp3-html-table td.name img.headshot {
+    position: static;
+    width: 55px;
+    height: 55px;
+  }
+  table.bp3-html-table td.name mark {
+    font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
   table.bp3-html-table td.contestant-name span.contestant {
     font-size: 10px;
   }
   table.bp3-html-table td.name img.headshot {
-    position: static;
-    width: 50px;
-    height: 50px;
-  }
-  table.bp3-html-table td.name span.first-name {
-    display: none;
+    width: 40px;
+    height: 40px;
   }
   table.bp3-html-table td.name mark {
     font-size: 10px;
@@ -138,6 +198,7 @@ span.projection {
     display: block;
     position: static;
     text-align: center;
+    margin: 0;
   }
   table.bp3-html-table td.name span.projection {
     font-family: inherit;
@@ -145,8 +206,6 @@ span.projection {
     display: block;
     position: static;
     text-align: center;
-  }
-  .hide-when-small {
-    display: none;
+    margin: 0;
   }
 }

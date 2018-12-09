@@ -73,7 +73,7 @@ function AthleteCell({athlete}: AthleteProps) {
     <>
       <td className="name athlete-name" style={style}>
         {headshot !== null ?
-          (<img src={headshot} className="headshot" />) :
+          (<img width={150} height={150} src={headshot} className="headshot" />) :
           null}
         <AthleteName name={athlete.name} />
         <ScoreAndProjection
