@@ -25,6 +25,18 @@ export function getHeadshot(athlete: Athlete): string | null {
   }
 }
 
+export function splitName(name: string): [string, string] {
+  let parts = name.split(' ')
+  let firstNameCutoff = parts.length - 1
+  let lastName = parts[parts.length - 1]
+  if (lastName === 'Jr.') {
+    lastName = [parts[parts.length - 2], lastName].join(' ')
+    firstNameCutoff -= 1
+  }
+  let firstName = parts.slice(0, firstNameCutoff).join(' ')
+  return [firstName, lastName]
+}
+
 export function project(athlete: Athlete): number {
   let doubles = [
     athlete.points, athlete.assists, athlete.rebounds, athlete.steals, athlete.blocks

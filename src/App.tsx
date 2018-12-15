@@ -3,7 +3,7 @@ import './App.css'
 
 import { HTMLTable } from "@blueprintjs/core"
 import { GlobalLeague, League, LeagueSelect } from "./LeagueSelect"
-import { Athlete, getHeadshot, project } from './athlete'
+import { Athlete, getHeadshot, project, splitName } from './athlete'
 import { ScoreAndProjection } from './ScoreAndProjection'
 import { DateInput, IDateFormatProps } from "@blueprintjs/datetime"
 
@@ -41,14 +41,7 @@ interface AthleteNameProps {
 }
 
 function AthleteName({name}: AthleteNameProps) {
-  let parts = name.split(' ')
-  let firstNameCutoff = parts.length - 1
-  let lastName = parts[parts.length - 1]
-  if (lastName === 'Jr.') {
-    lastName = [parts[parts.length - 2], lastName].join(' ')
-    firstNameCutoff -= 1
-  }
-  let firstName = parts.slice(0, firstNameCutoff).join(' ')
+  let [firstName, lastName] = splitName(name)
   return (
     <>
       <span className="first-name">
