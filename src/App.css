@@ -231,9 +231,11 @@ div.draftpanel h1 {
 }
 div.draftpanel .option {
   height: 80px;
-  width: 150px;
+  width: 160px;
   position: relative;
   justify-content: left;
+  border: 2px solid white;
+  background-image: none;
 }
 div.draftpanel .option h2 {
   font-size: 1em;
@@ -253,10 +255,28 @@ div.draftpanel .option img.headshot {
   width: 45px;
   height: 45px;
 }
+div.draftpanel .option span.salary {
+  display: inline-block;
+  position: absolute;
+  bottom: 6px;
+  left: 10px;
+  width: 45px;
+  text-align: left;
+}
+div.draftpanel .option span.average {
+  display: inline-block;
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  width: 45px;
+  text-align: center;
+}
 
 .bp3-tab.drafttab {
   line-height: 1em;
   width: 40px;
+  text-align: center;
+  padding-bottom: 5px;
 }
 
 .bp3-tab-list > .drafttab:not(:last-child) {

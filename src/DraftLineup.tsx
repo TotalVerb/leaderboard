@@ -47,9 +47,12 @@ export class OptionCard extends React.Component<OptionCardProps, {}> {
           <span className="firstname">{firstName}</span>
           <H2>{lastName}</H2>
           <Headshot name={this.props.option.name} alt="" />
-          {this.props.option.salary}K{' '}
-          {this.props.option.average.toFixed(1)}
-          {this.props.option.out ? ' OUT' : ''}
+          <span className="salary">{this.props.option.salary}K</span>{'\n'}
+          <span className="average">{
+            this.props.option.out
+            ? 'OUT'
+            : this.props.option.average.toFixed(1)
+          }</span>
         </div>}
         onClick={this.selectPlayer}
         className={classes.join(' ')}
