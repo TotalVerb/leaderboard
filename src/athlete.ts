@@ -1,5 +1,3 @@
-import { playerNumbers } from './theScoreNumber'
-
 export interface Athlete {
   name: string
   position: number
@@ -16,20 +14,11 @@ export interface Athlete {
   three_point_made: number
 }
 
-export function getHeadshot(athlete: Athlete): string | null {
-  let number = playerNumbers[athlete.name]
-  if (number) {
-    return `https://d1si3tbndbzwz9.cloudfront.net/basketball/player/${number}/transparent_medium_headshot.png`
-  } else {
-    return null
-  }
-}
-
 export function splitName(name: string): [string, string] {
   let parts = name.split(' ')
   let firstNameCutoff = parts.length - 1
   let lastName = parts[parts.length - 1]
-  if (lastName === 'Jr.') {
+  if (lastName === 'Jr.' || lastName === "III") {
     lastName = [parts[parts.length - 2], lastName].join(' ')
     firstNameCutoff -= 1
   }

@@ -31,7 +31,7 @@ table.bp3-html-table td.name {
   position: relative;
 }
 
-img.headshot {
+table.bp3-html-table img.headshot {
   position: absolute;
   top: 0;
   left: 0;
@@ -207,5 +207,72 @@ thead {
     position: static;
     text-align: center;
     margin: 0;
+  }
+}
+
+/* Drafting page */
+.bp3-tab img.headshot {
+  width: 40px;
+  height: 40px;
+}
+
+div.draftpanel {
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  max-height: 500px;
+  flex-wrap: wrap;
+  width: 80vw;
+  max-width: 800px;
+  overflow: auto;
+}
+div.draftpanel h1 {
+  display: none;
+}
+div.draftpanel .option {
+  height: 80px;
+  width: 150px;
+  position: relative;
+  justify-content: left;
+}
+div.draftpanel .option h2 {
+  font-size: 1em;
+  line-height: 1em;
+  font-weight: normal;
+}
+div.draftpanel .option .firstname {
+  font-size: 0.8em;
+}
+div.draftpanel .option.selected h2 {
+  font-weight: bold;
+}
+div.draftpanel .option img.headshot {
+  position: absolute;
+  top: 3px;
+  right: 6px;
+  width: 45px;
+  height: 45px;
+}
+
+.bp3-tab.drafttab {
+  line-height: 1em;
+  width: 40px;
+}
+
+.bp3-tab-list > .drafttab:not(:last-child) {
+  margin-right: 5px;
+}
+
+@media only screen and (max-width: 500px) {
+  div.draftpanel {
+    height: 70vh;
+    width: 80vw;
+  }
+  .bp3-tab.drafttab {
+    width: 30px;
+  }
+  .bp3-tab img.headshot {
+    width: 30px;
+    height: 30px;
   }
 }

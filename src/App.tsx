@@ -3,9 +3,12 @@ import './App.css'
 
 import { HTMLTable } from "@blueprintjs/core"
 import { GlobalLeague, League, LeagueSelect } from "./LeagueSelect"
-import { Athlete, getHeadshot, project, splitName } from './athlete'
+import { Athlete, project, splitName } from './athlete'
 import { ScoreAndProjection } from './ScoreAndProjection'
 import { DateInput, IDateFormatProps } from "@blueprintjs/datetime"
+import { DraftLineup } from './DraftLineup'
+import { Headshot } from './Headshot'
+import { fadeColor } from './fadeColor'
 
 const jsDateFormatter: IDateFormatProps = {
     // note that the native implementation of Date functions differs between browsers
@@ -53,21 +56,13 @@ function AthleteName({name}: AthleteNameProps) {
 }
 
 function AthleteCell({athlete}: AthleteProps) {
-  let headshot = getHeadshot(athlete)
-  let [red, green, blue] = [
-    parseInt(athlete.color.slice(1, 3), 16),
-    parseInt(athlete.color.slice(3, 5), 16),
-    parseInt(athlete.color.slice(5, 7), 16),
-  ]
   let style = {
-    backgroundColor: `rgba(${red}, ${green}, ${blue}, 0.4)`,
+    backgroundColor: fadeColor(athlete.color)
   }
   return (
     <>
       <td className="name athlete-name" style={style}>
-        {headshot !== null ?
-          (<img width={150} height={150} src={headshot} className="headshot" />) :
-          null}
+        <Headshot name={athlete.name} alt="" />
         <AthleteName name={athlete.name} />
         <ScoreAndProjection
           score={athlete.fpts}
@@ -209,6 +204,7 @@ class App extends React.Component<{}, AppState> {
           />
         </header>
         <Scoreboard lineups={filteredData} />
+        <DraftLineup />
       </div>
     )
   }
