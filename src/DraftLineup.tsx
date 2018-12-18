@@ -2,7 +2,8 @@ import * as React from 'react'
 import {
   Button, Popover, Card,
   Intent, Tab, Tabs,
-  H1, H2, InputGroup, Tooltip, ControlGroup
+  H1, H2, InputGroup, Tooltip, ControlGroup,
+  Spinner,
 } from '@blueprintjs/core'
 import { Headshot } from './Headshot'
 import { splitName } from './athlete'
@@ -289,7 +290,7 @@ export class DraftLineup extends React.Component<{}, DraftLineupState> {
     }
   }
 
-  public componentDidMount () {
+  public loadDraftAPI = () => {
     let url = 'https://nba.uwseminars.com/draftapi'
     fetch(url)
       .then(response => response.json())
@@ -300,10 +301,10 @@ export class DraftLineup extends React.Component<{}, DraftLineupState> {
 
   public render () {
     return (
-      <Popover>
+      <Popover onOpening={this.loadDraftAPI} >
         <Button text="Draft Lineup" />
         {this.state.data === null ? (<Card>
-          No draft available.
+          <Spinner />
         </Card>) : <DraftCard data={this.state.data} />}
       </Popover>
     )
