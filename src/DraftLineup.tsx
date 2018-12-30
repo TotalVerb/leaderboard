@@ -24,8 +24,13 @@ interface DraftOption {
 
 type DraftCategory = 'PG' | 'SG' | 'SF' | 'PF' | 'C'
 
-type DraftData = {
-  [K in DraftCategory]: Array<DraftOption>
+interface DraftData {
+  PG: Array<DraftOption>
+  SG: Array<DraftOption>
+  SF: Array<DraftOption>
+  PF: Array<DraftOption>
+  C: Array<DraftOption>
+  deadline: string
 }
 type DraftSelection = {
   [K in DraftCategory]: number | null
@@ -188,6 +193,8 @@ export class DraftCard extends React.Component<DraftCardProps, DraftCardState> {
           {this.getDraftTab('PF')}
           {this.getDraftTab('C')}
           <Tabs.Expander />
+          {this.props.data.deadline.trim()}
+          <br />
           {remainingSalary}K left{' '}
         </Tabs>
       </Card>
